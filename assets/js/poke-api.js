@@ -6,7 +6,7 @@ function convertPokeApiDetailToPokemon(pokeDetail){
     pokemon.number = pokeDetail.order
     pokemon.name = pokeDetail.name
     
-    // pokemon.types = pokeDetail.types.map((typeSlot) => typeSlor.type.name)
+    // pokemon.types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
     // pokemon.type = pokemon.types.get(0)
 
     const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
