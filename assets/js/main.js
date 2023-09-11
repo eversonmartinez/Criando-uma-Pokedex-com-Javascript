@@ -10,6 +10,7 @@ function loadPokemonItens(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {     //garante que por default será uma lista vazia
         pokemonList.innerHTML += pokemons.map((pokemon) => `
             <li class="pokemon ${pokemon.type}">
+                <a href="info.html" class="linkpokemon">
                 <span class="number">#${pokemon.number}</span>
                 <span class="name">${pokemon.name}</span>
 
@@ -19,7 +20,7 @@ function loadPokemonItens(offset, limit) {
                     </ol>
                     <img src="${pokemon.photo}" alt="${pokemon.name}">
                 </div>
-
+                </a>
             </li>
         `).join('')
     })
