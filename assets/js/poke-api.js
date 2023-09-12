@@ -1,6 +1,27 @@
 
 const pokeApi = {}
 
+// function getSpeciesInfoFromPokeDetail(urlSpecies){
+//     return fetch(urlSpecies).then((response) => response.json())
+// }
+
+function addMoreDetailsToPokemon(pokemon, pokeDetail){
+    const specieInfo = getSpeciesInfoFromPokeDetail(pokeDetail.species.url)
+    fetch(pokeDetail.species.url)
+    .then((response) => response.json())
+    .then((json) => {
+        pokemon.eggGroups = specieInfo.egg_groups.map((eggSlot) => eggSlot.name)
+        pokemon.habitat = specieInfo.habitat.name
+    })
+    
+    pokemon.height = pokeDetail.height
+    pokemon.weight = pokeDetail.weight
+    pokemon.abilities = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name)
+    
+    //se der algum problema é pq a função esta retornando o pokemon antes de terminar os fetchs logo a cima
+    return pokemon
+}
+
 function convertPokeApiDetailToPokemon(pokeDetail){
     const pokemon = new Pokemon()
     pokemon.number = pokeDetail.id
@@ -16,6 +37,15 @@ function convertPokeApiDetailToPokemon(pokeDetail){
     pokemon.type = type
 
     pokemon.photo = pokeDetail.sprites.other['official-artwork'].front_default
+
+    // pokemon.height = pokeDetail.height
+    // pokemon.weight = pokeDetail.weight
+    // pokemon.abilities = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name)
+    
+    // const specieInfo = getSpeciesInfoFromPokeDetail(pokeDetail.species.url).then(pokemon.eggGroups = specieInfo.egg_groups.map((eggSlot) => eggSlot.name))
+    
+    
+    // pokemon.habitat = specieInfo.habitat.name
 
     return pokemon
 }
@@ -35,6 +65,21 @@ pokeApi.getPokemons = (offset = 0, limit = 5) => { //atribuindo valores default
     .then((detailRequests) => Promise.all(detailRequests))  
     .then((pokemonsDetails) => pokemonsDetails)
     .catch((error) => console.log(error))
+}
+
+// Adicionei esse método para quando o objetivo for pegar informações de apenas 1 pokémon, mas informações detalhadas.
+pokeApi.getPokemon = (pokemonId) => {
+    const url='https://pokeapi.co/api/v2/pokemon/${id}/'
+    return fetch(url)
+    .then((response) => response.json())
+    .then((jsonBody) => jsonBody.results)
+    .then((pokemon) => {
+        detailedPokemon = pokeApi.getPokemonDetail(pokemon)
+        detailedPokemon = addMoreDetailsToPokemon(detailedPokemon, pokemon)
+        return pokemon
+    })
+    .then((detailRequests) => Promise.all(detailRequests))  
+    .then((pokemonsDetails) => pokemonsDetails)
 }
 
 // Promise.all([
