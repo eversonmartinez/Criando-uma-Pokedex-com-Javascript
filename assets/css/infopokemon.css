@@ -78,11 +78,6 @@
     cursor: pointer;
 }
 
-.action_bar #like.notclicked i{
-    color:pink;
-    fill: pink;
-} 
-
 .action_bar #like.clicked i{
     color:red;
 } 
@@ -153,11 +148,11 @@
 }
 
 .informations .pokemon_fields{
-    margin-bottom: 1.5rem;
-    
+    margin-bottom: 1.5rem;   
 }
 
 .informations .pokemon_fields td{
+    width: 15rem;
     padding: 1rem 4rem 0 0;
 }
 
