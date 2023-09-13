@@ -75,7 +75,17 @@
 .action_bar .icons:hover{
     color: #b8b4b4;
     font-size: 1.5rem;
+    cursor: pointer;
 }
+
+.action_bar #like.notclicked i{
+    color:pink;
+    fill: pink;
+} 
+
+.action_bar #like.clicked i{
+    color:red;
+} 
 
 .pokemon_header{
     margin:0 1.8rem;
@@ -87,8 +97,10 @@
 }
 
 .pokemon_header .name{
+    text-transform: capitalize;
     color: #fff;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
 }
 
 .pokemon_header .number{
@@ -112,11 +124,10 @@
 }
 
 .pokemon_header .detail .types .type{
-    background-color: #77c850;
     color: #fff;
     padding: .5rem 1rem;
     font-size: .825rem;
-    margin: .25rem 0;
+    margin-right: 0.40rem;
     border-radius: 1rem;
     filter: brightness(1.1);
     text-align: center;
@@ -141,22 +152,27 @@
     border-radius: 2rem 2rem 0 0 / 1.5rem 1.5rem 0 0;
 }
 
-.about{
-    margin: 0 0 1.5rem 0;
+.informations .pokemon_fields{
+    margin-bottom: 1.5rem;
+    
 }
 
 .informations .pokemon_fields td{
     padding: 1rem 4rem 0 0;
 }
 
-.informations .title{
+.informations .pokemon_fields .title{
     text-align: left;
     font-weight: bold;
     font-size: 1.2rem;
     border-bottom: 1px solid #7d7d7d;
 }
 
-.informations .data_definition{
+.informations .pokemon_fields .data{
+    text-transform: capitalize;
+}
+
+.informations .pokemon_fields .data_definition{
     color: #7d7d7d;
 
 }
@@ -186,6 +202,10 @@
         background-color: #ecdfdf;
     }
     
+    .action_bar .icons{
+        font-size: 1.5rem;
+    }
+
     .pokemon_image .image{
         height: 400px;
     }
@@ -195,5 +215,12 @@
         border-radius: 0;
     }
 
+    .pokemon_header .name{
+        font-size: 2.5rem;
+    }
+
+    .pokemon_header .number{
+        font-size: 2rem;
+    }
     
 }

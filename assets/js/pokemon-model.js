@@ -5,9 +5,11 @@ class Pokemon{
     type;
     types = [];
     photo;
+    baseHappiness;
     height;
     weight;
     abilities = [];
-    eggGroups;
+    growthRate;
+    eggGroups = [];
     habitat;
 }

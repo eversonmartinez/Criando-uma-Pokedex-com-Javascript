@@ -21,68 +21,72 @@
         
     </section>
 
-    <section class="content grass">
+    <section id="main" class="content">
         <div class="action_bar">
             <a href="index.html"><i class="fa-solid fa-arrow-left-long icons"></i></a>
-            <button><i class="fa-regular fa-heart icons"></i></button>
+            <button id="like"><i class="fa-regular fa-heart icons"></i></button>
         </div>
-        <div class="pokemon_header">
-            <div class="identities">
+        <div class="pokemon_header" id="header">
+            <!-- <div class="identities">
                 <span class="name">Bulbasaur</span>
                 <span class="number">#001</span>
             </div>
-            <div class="detail">
+            <div class="detail" id="">
                 <ol class="types">
                     <li class="type">Grass</li>
                     <li class="type">Poison</li>
                 </ol>   
-            </div> 
+            </div>  -->
         </div>
-        <div class="pokemon_image">
-            <img class="image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png">
+        <div class="pokemon_image" id="photo">
+            <!-- <img class="image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"> -->
         </div>
-    <div class="informations">
-        <div class="about">
-            <table class="pokemon_fields">
-                <th class="title" colspan="2">About</th>
-                <tr>
-                    <td class="data_definition">Species</td>
-                    <td class="data">Seed</td>
-                </tr>
-                <tr>
-                    <td class="data_definition">Height</td>
-                    <td class="data">2'3.6* (0.70 cm)</td>
-                </tr>           
-                <tr>
-                    <td class="data_definition">Weight</td>
-                    <td class="data">15.2 lbs (6.9  kg)</td>
-                </tr>
-                <tr>
-                    <td class="data_definition">Abilities</td>
-                    <td class="data">Overgrow, Chlorophyl</td>
-                </tr>
-            </table>
+        <div id="information" class="informations">
+            <!-- <div class="about">
+                <table class="pokemon_fields">
+                    <th class="title" colspan="2">About</th>
+                    <tr>
+                        <td class="data_definition">Species</td>
+                        <td class="data">Seed</td>
+                    </tr>
+                    <tr>
+                        <td class="data_definition">Height</td>
+                        <td class="data">2'3.6* (0.70 cm)</td>
+                    </tr>           
+                    <tr>
+                        <td class="data_definition">Weight</td>
+                        <td class="data">15.2 lbs (6.9  kg)</td>
+                    </tr>
+                    <tr>
+                        <td class="data_definition">Abilities</td>
+                        <td class="data">Overgrow, Chlorophyl</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="breeding">
+                <table class="pokemon_fields">
+                    <th class="title" colspan="2">Breeding</th>
+                    <tr>
+                        <td class="data_definition">Gender</td>
+                        <td class="data">87.5% 12.5%</td>
+                    </tr>
+                    <tr>
+                        <td class="data_definition">Egg Groups</td>
+                        <td class="data">Monster</td>
+                    </tr>           
+                    <tr>
+                        <td class="data_definition">Egg Cycle</td>
+                        <td class="data">Grass</td>
+                    </tr>
+                </table>
+            </div> -->
         </div>
-        <div class="breeding">
-            <table class="pokemon_fields">
-                <th class="title" colspan="2">Breeding</th>
-                <tr>
-                    <td class="data_definition">Gender</td>
-                    <td class="data">87.5% 12.5%</td>
-                </tr>
-                <tr>
-                    <td class="data_definition">Egg Groups</td>
-                    <td class="data">Monster</td>
-                </tr>           
-                <tr>
-                    <td class="data_definition">Egg Cycle</td>
-                    <td class="data">Grass</td>
-                </tr>
-            </table>
-        </div>
-    </div>
     </section>
     
     <script src="https://kit.fontawesome.com/b47e9ae9a3.js" crossorigin="anonymous"></script>
+    <!-- Nosso JS -->
+    <script src="/assets/js/pokemon-model.js"></script>
+    <script src="/assets/js/poke-api.js"></script>
+    <script src="/assets/js/infopokemon.js"></script>
 </body>
 </html>

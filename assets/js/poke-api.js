@@ -1,25 +1,58 @@
 
 const pokeApi = {}
 
-// function getSpeciesInfoFromPokeDetail(urlSpecies){
-//     return fetch(urlSpecies).then((response) => response.json())
-// }
+// async function getSpeciesInfoFromPokeDetail(urlSpecies) {
+//     const response = await fetch(urlSpecies);
+//     const jsonBody = await response.json();
+//     return jsonBody;
+//   }
+  
+//   async function addMoreDetailsToPokemon(pokemon, pokeDetail) {
+//     try {
+//       const specieInfo = await getSpeciesInfoFromPokeDetail(pokeDetail.species.url);
+  
+//       console.log(specieInfo.id);
+//       pokemon.habitat = specieInfo.habitat.name;
+//       pokemon.height = pokeDetail.height;
+//       pokemon.weight = pokeDetail.weight;
+//       pokemon.abilities = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name);
+  
+//       return pokemon;
+//     } catch (error) {
+//       console.error('Erro ao obter informações da espécie:', error);
+//     }
+//   }
+
+function getSpeciesInfoFromPokeDetail(urlSpecies){
+    specie = fetch(urlSpecies).then((response) => response.json()).then((jsonBody) => jsonBody)
+    return(specie)
+}
 
 function addMoreDetailsToPokemon(pokemon, pokeDetail){
-    const specieInfo = getSpeciesInfoFromPokeDetail(pokeDetail.species.url)
-    fetch(pokeDetail.species.url)
-    .then((response) => response.json())
-    .then((json) => {
-        pokemon.eggGroups = specieInfo.egg_groups.map((eggSlot) => eggSlot.name)
-        pokemon.habitat = specieInfo.habitat.name
-    })
+    //const specieInfo = getSpeciesInfoFromPokeDetail(pokeDetail.species.url)
+    // () => fetch(pokeDetail.species.url)
+    // .then((response) => response.json())
+    // .then((detailRequests) => Promise.all(detailRequests)) 
+    // .then((pokemonsDetails) => pokemonsDetails) 
     
+    //pokemon.eggGroups = specieInfo.egg_groups.map((eggSlot) => eggSlot.name)
+    //console.log(specieInfo.id)
     pokemon.height = pokeDetail.height
     pokemon.weight = pokeDetail.weight
     pokemon.abilities = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name)
+    return fetch(pokeDetail.species.url).then((response) => response.json()).then((specieInfo) => {
+        pokemon.baseHappiness = specieInfo.base_happiness
+        pokemon.growthRate = specieInfo.growth_rate.name
+        pokemon.habitat=specieInfo.habitat.name
+        pokemon.eggGroups = specieInfo.egg_groups.map((eggSlot) => eggSlot.name)
+        return pokemon})
+    //pokemon.habitat = specieInfo.habitat.name
+    // pokemon.height = pokeDetail.height
+    // pokemon.weight = pokeDetail.weight
+    //
     
     //se der algum problema é pq a função esta retornando o pokemon antes de terminar os fetchs logo a cima
-    return pokemon
+    //return pokemon
 }
 
 function convertPokeApiDetailToPokemon(pokeDetail){
@@ -50,6 +83,13 @@ function convertPokeApiDetailToPokemon(pokeDetail){
     return pokemon
 }
 
+pokeApi.getPokemonDetailed = (pokemon) => {
+    return fetch(pokemon.url)
+            .then((response) => response.json())
+            .then(convertPokeApiDetailToPokemon)
+            .then((pokemonSimple) => addMoreDetailsToPokemon(pokemonSimple, pokemon))
+}
+
 pokeApi.getPokemonDetail = (pokemon) => {
     return fetch(pokemon.url)
             .then((response) => response.json())
@@ -68,18 +108,19 @@ pokeApi.getPokemons = (offset = 0, limit = 5) => { //atribuindo valores default
 }
 
 // Adicionei esse método para quando o objetivo for pegar informações de apenas 1 pokémon, mas informações detalhadas.
-pokeApi.getPokemon = (pokemonId) => {
-    const url='https://pokeapi.co/api/v2/pokemon/${id}/'
+pokeApi.getPokemon = (pokemonId = 1) => {
+    const url=`https://pokeapi.co/api/v2/pokemon/${pokemonId}`
     return fetch(url)
     .then((response) => response.json())
-    .then((jsonBody) => jsonBody.results)
     .then((pokemon) => {
-        detailedPokemon = pokeApi.getPokemonDetail(pokemon)
+        detailedPokemon = convertPokeApiDetailToPokemon(pokemon)
+        //detailedPokemon = pokeApi.getPokemonDetailed(pokemon)
         detailedPokemon = addMoreDetailsToPokemon(detailedPokemon, pokemon)
-        return pokemon
+        return detailedPokemon
     })
-    .then((detailRequests) => Promise.all(detailRequests))  
-    .then((pokemonsDetails) => pokemonsDetails)
+    // .then((detailRequests) => Promise.all(detailRequests))  
+    // .then((pokemonsDetails) => {debugger 
+    //     return pokemonsDetails})
 }
 
 // Promise.all([
